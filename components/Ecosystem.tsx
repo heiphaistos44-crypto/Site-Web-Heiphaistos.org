@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { MessageCircle, ExternalLink, ArrowRight } from "lucide-react";
 import GithubIcon from "@/components/icons/GithubIcon";
 import Link from "next/link";
+import { FORGE_EASE } from "@/lib/easing";
+
+const MotionLink = motion(Link);
 
 const LINKS = [
   {
@@ -48,6 +51,46 @@ const LINKS = [
   },
 ];
 
+const cardClasses =
+  "group relative bg-forge-card border border-forge-border rounded-xl p-5 sm:p-6 flex flex-col gap-4 hover:border-forge-orange/40 card-glow transition-colors duration-300";
+
+const cardMotionProps = (i: number) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" as const },
+  transition: { duration: 0.6, delay: i * 0.1, ease: FORGE_EASE },
+  whileHover: { y: -5, transition: { duration: 0.2 } },
+  className: cardClasses,
+});
+
+function CardInner({ link }: { link: (typeof LINKS)[number] }) {
+  return (
+    <>
+      <div
+        className="inline-flex p-3 rounded-lg w-fit transition-transform duration-300 group-hover:scale-110"
+        style={{ background: link.bgAlpha }}
+      >
+        <link.icon className="w-5 h-5" style={{ color: link.accentHex }} />
+      </div>
+      <div className="flex-1">
+        <h3 className="font-heading text-xl tracking-wider text-forge-text mb-2 group-hover:text-forge-orange transition-colors duration-300">
+          {link.title}
+        </h3>
+        <p className="font-sans text-sm text-forge-muted leading-relaxed font-light">
+          {link.description}
+        </p>
+      </div>
+      <span
+        className="font-sans text-xs font-semibold uppercase tracking-[0.15em] flex items-center gap-1.5 group-hover:gap-3 transition-all duration-300"
+        style={{ color: link.accentHex }}
+      >
+        {link.cta}
+        <ArrowRight className="w-3 h-3 flex-shrink-0" />
+      </span>
+    </>
+  );
+}
+
 export default function Ecosystem() {
   return (
     <section
@@ -75,66 +118,27 @@ export default function Ecosystem() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {LINKS.map((link, i) => {
-            const cardClasses =
-              "group relative bg-forge-card border border-forge-border rounded-xl p-5 sm:p-6 flex flex-col gap-4 hover:border-forge-orange/40 card-glow transition-colors duration-300";
-            const inner = (
-              <>
-                <div
-                  className="inline-flex p-3 rounded-lg w-fit transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: link.bgAlpha }}
-                >
-                  <link.icon className="w-5 h-5" style={{ color: link.accentHex }} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-heading text-xl tracking-wider text-forge-text mb-2 group-hover:text-forge-orange transition-colors duration-300">
-                    {link.title}
-                  </h3>
-                  <p className="font-sans text-sm text-forge-muted leading-relaxed font-light">
-                    {link.description}
-                  </p>
-                </div>
-                <span
-                  className="font-sans text-xs font-semibold uppercase tracking-[0.15em] flex items-center gap-1.5 group-hover:gap-3 transition-all duration-300"
-                  style={{ color: link.accentHex }}
-                >
-                  {link.cta}
-                  <ArrowRight className="w-3 h-3 flex-shrink-0" />
-                </span>
-              </>
-            );
-
-            return link.external ? (
+          {LINKS.map((link, i) =>
+            link.external ? (
               <motion.a
                 key={link.title}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className={cardClasses}
+                {...cardMotionProps(i)}
               >
-                {inner}
+                <CardInner link={link} />
               </motion.a>
             ) : (
-              <motion.div
+              <MotionLink
                 key={link.title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className={cardClasses}
+                href={link.href}
+                {...cardMotionProps(i)}
               >
-                <Link href={link.href} className="flex flex-col gap-4 flex-1">
-                  {inner}
-                </Link>
-              </motion.div>
-            );
-          })}
+                <CardInner link={link} />
+              </MotionLink>
+            )
+          )}
         </div>
       </div>
     </section>

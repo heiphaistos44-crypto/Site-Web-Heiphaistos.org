@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Flame, Menu, X } from "lucide-react";
 import Link from "next/link";
 import GithubIcon from "@/components/icons/GithubIcon";
+import { FORGE_EASE } from "@/lib/easing";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +21,7 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+      transition={{ duration: 0.7, ease: FORGE_EASE }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-forge-black/90 backdrop-blur-xl border-b border-forge-border"

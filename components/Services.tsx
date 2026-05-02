@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Monitor, HardDrive, KeyRound, Wrench, Cpu, Code2, Lightbulb } from "lucide-react";
 import Link from "next/link";
+import { FORGE_EASE } from "@/lib/easing";
 
 const SERVICES = [
   {
@@ -59,7 +60,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+    transition: { duration: 0.6, ease: FORGE_EASE },
   },
 };
 

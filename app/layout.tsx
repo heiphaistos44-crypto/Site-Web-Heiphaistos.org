@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Barlow } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +13,11 @@ const barlow = Barlow({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   title: "Heiphaistos IT — Maintenance & Solutions Informatiques",

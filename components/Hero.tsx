@@ -1,20 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, MessageCircle, Wrench } from "lucide-react";
+import { FORGE_EASE } from "@/lib/easing";
 
 const EMBER_COUNT = 22;
 
-const embers = Array.from({ length: EMBER_COUNT }, (_, i) => ({
-  id: i,
-  left: `${5 + (i / EMBER_COUNT) * 90}%`,
-  size: `${1.5 + Math.random() * 3.5}px`,
-  duration: `${5 + Math.random() * 7}s`,
-  delay: `${Math.random() * 8}s`,
-  drift: `${(Math.random() - 0.5) * 120}px`,
-}));
-
 export default function Hero() {
+  const [embers] = useState(() =>
+    Array.from({ length: EMBER_COUNT }, (_, i) => ({
+      id: i,
+      left: `${5 + (i / EMBER_COUNT) * 90}%`,
+      size: `${1.5 + Math.random() * 3.5}px`,
+      duration: `${5 + Math.random() * 7}s`,
+      delay: `${Math.random() * 8}s`,
+      drift: `${(Math.random() - 0.5) * 120}px`,
+    }))
+  );
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Base background */}
@@ -81,7 +85,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, scale: 0.92, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.1, delay: 0.5, ease: FORGE_EASE }}
           className="font-heading leading-none mb-8 gradient-text"
           style={{ fontSize: "clamp(3rem, 14vw, 14rem)" }}
         >

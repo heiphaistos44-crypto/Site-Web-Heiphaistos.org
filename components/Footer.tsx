@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Flame } from "lucide-react";
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const [year] = useState(() => new Date().getFullYear());
 
   return (
     <footer
