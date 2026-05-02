@@ -68,7 +68,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pt-20 sm:pt-16">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="font-heading leading-none mb-8 gradient-text"
-          style={{ fontSize: "clamp(4.5rem, 16vw, 14rem)" }}
+          style={{ fontSize: "clamp(3rem, 14vw, 14rem)" }}
         >
           HEIPHAISTOS
         </motion.h1>

@@ -15,7 +15,7 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "Heiphaistos — Maintenance & Solutions Informatiques",
+  title: "Heiphaistos IT — Maintenance & Solutions Informatiques",
   description:
     "Technicien expert en maintenance, réparation, récupération de données et solutions informatiques sur mesure.",
   keywords: [

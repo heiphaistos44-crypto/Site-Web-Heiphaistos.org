@@ -20,34 +20,34 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-forge-black/90 backdrop-blur-xl border-b border-forge-border"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Flame className="w-5 h-5 text-forge-orange group-hover:scale-125 transition-transform duration-300" />
-          <span className="font-heading text-xl tracking-[0.3em] text-forge-text">
-            HEIPHAISTOS
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 group min-w-0">
+          <Flame className="w-5 h-5 text-forge-orange group-hover:scale-125 transition-transform duration-300 flex-shrink-0" />
+          <span className="font-heading text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-forge-text truncate">
+            HEIPHAISTOS IT
           </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <a
-            href="#services"
+          <Link
+            href="/#services"
             className="font-sans text-xs text-forge-muted hover:text-forge-orange transition-colors duration-200 uppercase tracking-[0.2em]"
           >
             Services
-          </a>
-          <a
-            href="#ecosystem"
+          </Link>
+          <Link
+            href="/#ecosystem"
             className="font-sans text-xs text-forge-muted hover:text-forge-orange transition-colors duration-200 uppercase tracking-[0.2em]"
           >
             Projets
-          </a>
+          </Link>
           <a
             href="https://github.com/heiphaistos44-crypto"
             target="_blank"
@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-forge-muted hover:text-forge-text transition-colors"
+          className="md:hidden text-forge-muted hover:text-forge-text transition-colors p-1"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
@@ -85,26 +85,26 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-forge-dark/95 backdrop-blur-xl border-b border-forge-border overflow-hidden"
           >
-            <div className="px-6 py-5 flex flex-col gap-4">
-              <a
-                href="#services"
+            <div className="px-4 py-5 flex flex-col gap-4">
+              <Link
+                href="/#services"
                 onClick={() => setMenuOpen(false)}
-                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors"
+                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors py-1"
               >
                 Services
-              </a>
-              <a
-                href="#ecosystem"
+              </Link>
+              <Link
+                href="/#ecosystem"
                 onClick={() => setMenuOpen(false)}
-                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors"
+                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors py-1"
               >
                 Projets
-              </a>
+              </Link>
               <a
                 href="https://github.com/heiphaistos44-crypto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors"
+                className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors py-1"
               >
                 GitHub
               </a>
@@ -112,7 +112,7 @@ export default function Navbar() {
                 href="https://discord.gg/gygfkCTNsv"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-sans font-semibold text-sm uppercase tracking-[0.15em] text-center rounded"
+                className="px-4 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-sans font-semibold text-sm uppercase tracking-[0.15em] text-center rounded mt-1"
               >
                 Discord
               </a>
