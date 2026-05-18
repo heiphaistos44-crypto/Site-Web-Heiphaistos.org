@@ -1,3 +1,9 @@
+export interface Contributor {
+  name: string;
+  url: string;
+  role: string;
+}
+
 export interface OngoingProject {
   name: string;
   tagline: string;
@@ -10,6 +16,7 @@ export interface OngoingProject {
   since: string;
   githubUrl?: string;
   visibility?: "public" | "private";
+  contributors?: Contributor[];
 }
 
 export const ONGOING_DEFAULT: OngoingProject[] = [
@@ -174,6 +181,9 @@ export const ONGOING_DEFAULT: OngoingProject[] = [
     since: "Fév. 2026",
     githubUrl: "https://github.com/heiphaistos44-crypto/Gestionnaire-ordiplus-",
     visibility: "private",
+    contributors: [
+      { name: "Gaeel50GLR", url: "https://github.com/Gaeel50GLR", role: "Créateur & Contributeur" },
+    ],
   },
   {
     name: "OrdiPlus Fiches",
