@@ -16,6 +16,7 @@ const PUBLISHED = [
     tech: ["Tauri v2", "Rust", "Vue.js", "Windows", "WinPE"],
     href: "/projets/nitrite",
     url: "https://nitrite.heiphaistos.org",
+    external: false,
   },
   {
     name: "Plexit",
@@ -25,6 +26,67 @@ const PUBLISHED = [
     tech: ["Vue.js", "Cloudflare Pages", "Tautulli API", "D1"],
     href: "/projets/plexit",
     url: "https://plexit.heiphaistos.org",
+    external: false,
+  },
+  {
+    name: "PureRemove",
+    tagline: "Suppression de fond d'image IA",
+    description:
+      "Application Windows portable pour supprimer les arrière-plans via RMBG-1.4. Traitement parallèle rayon, zéro cloud, zéro données envoyées.",
+    tech: ["Tauri v2", "Rust", "React", "ONNX", "RMBG-1.4"],
+    href: "https://github.com/heiphaistos44-crypto/PureRemove",
+    url: "https://github.com/heiphaistos44-crypto/PureRemove",
+    external: true,
+  },
+  {
+    name: "UniversalConverter",
+    tagline: "Convertisseur de documents multi-format",
+    description:
+      "Convertit PDF, PNG, HTML, TXT, DOCX et autres formats. Moteur Rust haute performance, interface React moderne.",
+    tech: ["Tauri v2", "Rust", "React", "TypeScript"],
+    href: "https://github.com/heiphaistos44-crypto/UniversalConverter",
+    url: "https://github.com/heiphaistos44-crypto/UniversalConverter",
+    external: true,
+  },
+  {
+    name: "OmniPlayer",
+    tagline: "Lecteur multimédia type VLC en Rust",
+    description:
+      "Player audio/vidéo multi-format avec rendu GPU via shaders WGSL et pipeline FFmpeg. Interface egui native.",
+    tech: ["Rust", "Go", "WGSL", "FFmpeg", "egui"],
+    href: "https://github.com/heiphaistos44-crypto/OmniPlayer",
+    url: "https://github.com/heiphaistos44-crypto/OmniPlayer",
+    external: true,
+  },
+  {
+    name: "TutoInfo",
+    tagline: "Plateforme de tutoriels informatiques",
+    description:
+      "Site de tutoriels avec vidéo via tunnel Proxmox, authentification NextAuth v5 et base de données D1 Cloudflare.",
+    tech: ["Next.js 16", "NextAuth v5", "Cloudflare D1", "Tailwind"],
+    href: "https://tuto.heiphaistos.org",
+    url: "https://tuto.heiphaistos.org",
+    external: true,
+  },
+  {
+    name: "RSSDI",
+    tagline: "Flux RSS → Discord automatisé",
+    description:
+      "Backend Python containerisé qui ingère des flux RSS et diffuse les articles sur Discord. MongoDB + SQLite + dashboard HTML.",
+    tech: ["Python", "Docker", "MongoDB", "SQLite", "discord.py"],
+    href: "https://github.com/heiphaistos44-crypto/RSSDI",
+    url: "https://github.com/heiphaistos44-crypto/RSSDI",
+    external: true,
+  },
+  {
+    name: "Bot Discord",
+    tagline: "Bot Discord multifonction 50+ commandes",
+    description:
+      "Économie, modération, jeux, tickets, giveaways, logs avancés. SQLite pour la persistance, dashboard web intégré.",
+    tech: ["Python", "discord.py", "SQLite"],
+    href: "https://github.com/heiphaistos44-crypto/Bot-Discord-RSSDI",
+    url: "https://github.com/heiphaistos44-crypto/Bot-Discord-RSSDI",
+    external: true,
   },
 ];
 
@@ -123,7 +185,7 @@ export default function ProjetsPage() {
             <div className="flex-1 h-px bg-forge-border" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PUBLISHED.map((project, i) => (
               <motion.div
                 key={project.name}
@@ -177,13 +239,25 @@ export default function ProjetsPage() {
                   ))}
                 </div>
 
-                <Link
-                  href={project.href}
-                  className="inline-flex items-center gap-1.5 text-forge-orange font-sans text-xs font-semibold uppercase tracking-[0.15em] hover:gap-3 transition-all duration-200 w-fit"
-                >
-                  Voir le projet
-                  <ArrowRight className="w-3 h-3 flex-shrink-0" />
-                </Link>
+                {project.external ? (
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-forge-orange font-sans text-xs font-semibold uppercase tracking-[0.15em] hover:gap-3 transition-all duration-200 w-fit"
+                  >
+                    Voir le projet
+                    <ArrowRight className="w-3 h-3 flex-shrink-0" />
+                  </a>
+                ) : (
+                  <Link
+                    href={project.href}
+                    className="inline-flex items-center gap-1.5 text-forge-orange font-sans text-xs font-semibold uppercase tracking-[0.15em] hover:gap-3 transition-all duration-200 w-fit"
+                  >
+                    Voir le projet
+                    <ArrowRight className="w-3 h-3 flex-shrink-0" />
+                  </Link>
+                )}
               </motion.div>
             ))}
           </div>

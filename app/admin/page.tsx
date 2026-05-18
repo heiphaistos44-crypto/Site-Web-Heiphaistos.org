@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Flame, Lock, User } from "lucide-react";
 
-const L_HASH = "6f5d5462108f738eb9b2ff4b9d5c847719018d1976c869ccc0e9e2dd73901c93";
+const L_HASH = "ae1f5b4abee034c79f0b49dcbdeecc2efc4353460c838b4820b96ba728d9ba27";
 const P_HASH = "dbd90653b7825d0f6f7ec11dedf1f2e8a083635af452b0aa88c32d1efcbffa32";
 
 async function sha256(str: string): Promise<string> {
