@@ -34,6 +34,69 @@ const PUBLISHED = [
   },
 ];
 
+interface GitHubData {
+  stars: number;
+  pushedAt: string;
+}
+
+function useGitHubRepo(githubUrl?: string): GitHubData | null {
+  const [data, setData] = useState<GitHubData | null>(null);
+  useEffect(() => {
+    if (!githubUrl) return;
+    const match = githubUrl.match(/github\.com\/([^/]+)\/([^/\s]+)/);
+    if (!match) return;
+    const [, owner, repo] = match;
+    const key = `gh_${owner}_${repo}`;
+    try {
+      const cached = sessionStorage.getItem(key);
+      if (cached) { setData(JSON.parse(cached)); return; }
+    } catch {}
+    fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers: { Accept: "application/vnd.github+json" } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { stargazers_count: number; pushed_at: string } | null) => {
+        if (!d) return;
+        const result: GitHubData = { stars: d.stargazers_count, pushedAt: d.pushed_at };
+        try { sessionStorage.setItem(key, JSON.stringify(result)); } catch {}
+        setData(result);
+      })
+      .catch(() => {});
+  }, [githubUrl]);
+  return data;
+}
+
+function formatRelative(iso: string): string {
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (days === 0) return "aujourd'hui";
+  if (days === 1) return "hier";
+  if (days < 7) return `il y a ${days}j`;
+  if (days < 30) return `il y a ${Math.floor(days / 7)}sem`;
+  if (days < 365) return `il y a ${Math.floor(days / 30)}mois`;
+  return `il y a ${Math.floor(days / 365)}an`;
+}
+
+function GitHubStats({ githubUrl }: { githubUrl?: string }) {
+  const data = useGitHubRepo(githubUrl);
+  if (!data) return null;
+  return (
+    <div className="flex items-center gap-3 mt-1.5">
+      {data.stars > 0 && (
+        <span className="inline-flex items-center gap-1 font-sans text-[9px] text-[#888]">
+          <svg className="w-2.5 h-2.5 text-[#f97316]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          {data.stars}
+        </span>
+      )}
+      <span className="inline-flex items-center gap-1 font-sans text-[9px] text-[#888]">
+        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+        </svg>
+        Push {formatRelative(data.pushedAt)}
+      </span>
+    </div>
+  );
+}
+
 function VisibilityBadge({ visibility }: { visibility?: "public" | "private" }) {
   if (!visibility) return null;
   const pub = visibility === "public";
@@ -206,11 +269,13 @@ export default function ProjetsPage() {
                   </a>
                 </div>
 
-                <p className="font-sans text-sm text-[#c8c8c8] leading-relaxed font-light flex-1 mb-4">
+                <p className="font-sans text-sm text-[#c8c8c8] leading-relaxed font-light flex-1 mb-3">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <GitHubStats githubUrl={project.url.includes("github.com") ? project.url : undefined} />
+
+                <div className="flex flex-wrap gap-1.5 mb-5 mt-3">
                   {project.tech.map((t) => (
                     <span
                       key={t}
@@ -289,6 +354,7 @@ export default function ProjetsPage() {
                         <Clock className="w-2.5 h-2.5 text-[#888]" />
                         <span className="font-sans text-[#888] text-[10px]">Depuis {project.since}</span>
                       </div>
+                      <GitHubStats githubUrl={project.githubUrl} />
                     </div>
                   </div>
 
