@@ -198,3 +198,14 @@ export const ONGOING_DEFAULT: OngoingProject[] = [
     visibility: "public",
   },
 ];
+
+export function mergeWithDefaults(
+  stored: OngoingProject[],
+  defaults: OngoingProject[]
+): OngoingProject[] {
+  const storedMap = new Map(stored.map((p) => [p.name, p]));
+  const defaultNames = new Set(defaults.map((d) => d.name));
+  const merged = defaults.map((d) => storedMap.get(d.name) ?? d);
+  const custom = stored.filter((p) => !defaultNames.has(p.name));
+  return [...merged, ...custom];
+}
