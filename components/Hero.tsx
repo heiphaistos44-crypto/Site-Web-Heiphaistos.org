@@ -99,12 +99,17 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.95, ease: FORGE_EASE }}
           className="flex justify-center mb-6"
         >
-          <div className="logo-wrapper" style={{ display: "inline-block", position: "relative" }}>
+          <div className="forge-logo-wrap">
+            <div className="forge-glow-base" />
+            <div className="forge-ring-fire" />
+            <div className="forge-ring-warm" />
+            <div className="forge-ring-arc" />
             <img
               src="/logo.png"
               alt="Heiphaistos"
-              className="logo-heiphaistos w-40 h-40 sm:w-56 sm:h-56 object-cover"
+              className="forge-logo-img w-40 h-40 sm:w-56 sm:h-56"
             />
+            <div className="forge-logo-shimmer" />
           </div>
         </motion.div>
 
