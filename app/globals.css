@@ -75,6 +75,54 @@ body {
   box-shadow: 0 0 25px rgba(249, 115, 22, 0.12), 0 0 0 1px rgba(249, 115, 22, 0.3);
 }
 
+/* ── Hero logo — halo électrique bleu ── */
+.logo-heiphaistos {
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 25px #00aaff;
+  animation: haloPulse 2.2s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.logo-heiphaistos::before {
+  content: "";
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 25px #00aaff,
+    0 0 50px #00aaff,
+    0 0 80px #00ccff;
+  opacity: 0.7;
+  filter: blur(2px);
+  animation: haloFlicker 1.4s infinite alternate;
+  pointer-events: none;
+}
+
+.logo-heiphaistos:hover {
+  animation: haloPulseFast 1.2s infinite ease-in-out;
+  transform: scale(1.05);
+}
+
+@keyframes haloPulse {
+  0%   { box-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; }
+  50%  { box-shadow: 0 0 60px #00ccff, 0 0 110px #00e0ff; }
+  100% { box-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; }
+}
+
+@keyframes haloPulseFast {
+  0%   { box-shadow: 0 0 30px #00ccff, 0 0 70px #00e0ff; }
+  50%  { box-shadow: 0 0 80px #00f0ff, 0 0 130px #00ffff; }
+  100% { box-shadow: 0 0 30px #00ccff, 0 0 70px #00e0ff; }
+}
+
+@keyframes haloFlicker {
+  0%   { opacity: 0.4; transform: scale(1); }
+  30%  { opacity: 0.9; transform: scale(1.05); }
+  60%  { opacity: 0.6; transform: scale(1.02); }
+  100% { opacity: 0.8; transform: scale(1.08); }
+}
+
 .noise-overlay::before {
   content: '';
   position: fixed;

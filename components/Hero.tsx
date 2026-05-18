@@ -99,12 +99,13 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.95, ease: FORGE_EASE }}
           className="flex justify-center mb-6"
         >
-          <img
-            src="/logo.png"
-            alt="Heiphaistos"
-            className="w-40 h-40 sm:w-56 sm:h-56 rounded-full object-cover"
-            style={{ boxShadow: "0 0 48px rgba(249,115,22,0.35), 0 0 96px rgba(239,68,68,0.15)" }}
-          />
+          <div className="logo-wrapper" style={{ display: "inline-block", position: "relative" }}>
+            <img
+              src="/logo.png"
+              alt="Heiphaistos"
+              className="logo-heiphaistos w-40 h-40 sm:w-56 sm:h-56 object-cover"
+            />
+          </div>
         </motion.div>
 
         <motion.div
