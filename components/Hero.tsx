@@ -104,11 +104,9 @@ export default function Hero() {
             <div className="forge-ring-fire" />
             <div className="forge-ring-warm" />
             <div className="forge-ring-arc" />
-            <img
-              src="/logo.png"
-              alt="Heiphaistos"
-              className="forge-logo-img w-40 h-40 sm:w-56 sm:h-56"
-            />
+            <div className="forge-logo-clip w-40 h-40 sm:w-56 sm:h-56">
+              <img src="/logo.png" alt="Heiphaistos" />
+            </div>
             <div className="forge-logo-shimmer" />
           </div>
         </motion.div>
