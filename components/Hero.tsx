@@ -73,7 +73,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pt-20 sm:pt-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pt-6 sm:pt-2">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.5, ease: FORGE_EASE }}
-          className="font-heading leading-none mb-8 gradient-text"
+          className="font-heading leading-none mb-5 gradient-text"
           style={{ fontSize: "clamp(3rem, 14vw, 14rem)" }}
         >
           HEIPHAISTOS
@@ -102,8 +102,8 @@ export default function Hero() {
           <img
             src="/logo.png"
             alt="Heiphaistos"
-            className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
-            style={{ boxShadow: "0 0 32px rgba(249,115,22,0.25), 0 0 64px rgba(239,68,68,0.1)" }}
+            className="w-40 h-40 sm:w-56 sm:h-56 rounded-full object-cover"
+            style={{ boxShadow: "0 0 48px rgba(249,115,22,0.35), 0 0 96px rgba(239,68,68,0.15)" }}
           />
         </motion.div>
 
