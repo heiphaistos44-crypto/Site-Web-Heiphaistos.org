@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink, Clock, CheckCircle2, Circle } from "lucide-react";
+import { ArrowRight, ExternalLink, Clock, CheckCircle2, Circle, Download } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FORGE_EASE } from "@/lib/easing";
@@ -34,9 +34,31 @@ const PUBLISHED = [
   },
 ];
 
+interface ReleaseInfo {
+  tag: string;
+  assetName: string;
+  downloadUrl: string;
+  size: number;
+}
+
 interface GitHubData {
   stars: number;
   pushedAt: string;
+  release?: ReleaseInfo;
+}
+
+type GHAsset = { name: string; browser_download_url: string; size: number };
+
+function pickBestAsset(assets: GHAsset[]): GHAsset | undefined {
+  const SKIP = [".sig", ".sha256", ".sha256.txt", ".asc"];
+  const valid = assets.filter((a) => !SKIP.some((ext) => a.name.endsWith(ext)));
+  if (!valid.length) return undefined;
+  return (
+    valid.find((a) => /setup|installer|_x64|_x86/i.test(a.name) && a.name.endsWith(".exe")) ??
+    valid.find((a) => a.name.endsWith(".exe")) ??
+    valid.find((a) => /\.(zip|7z|msi)$/.test(a.name)) ??
+    valid[0]
+  );
 }
 
 function useGitHubRepo(githubUrl?: string): GitHubData | null {
@@ -46,20 +68,33 @@ function useGitHubRepo(githubUrl?: string): GitHubData | null {
     const match = githubUrl.match(/github\.com\/([^/]+)\/([^/\s]+)/);
     if (!match) return;
     const [, owner, repo] = match;
-    const key = `gh_${owner}_${repo}`;
+    const key = `gh2_${owner}_${repo}`;
     try {
       const cached = sessionStorage.getItem(key);
       if (cached) { setData(JSON.parse(cached)); return; }
     } catch {}
-    fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers: { Accept: "application/vnd.github+json" } })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d: { stargazers_count: number; pushed_at: string } | null) => {
-        if (!d) return;
-        const result: GitHubData = { stars: d.stargazers_count, pushedAt: d.pushed_at };
-        try { sessionStorage.setItem(key, JSON.stringify(result)); } catch {}
-        setData(result);
-      })
-      .catch(() => {});
+    const headers = { Accept: "application/vnd.github+json" };
+    Promise.allSettled([
+      fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers }),
+      fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, { headers }),
+    ]).then(async ([repoRes, releaseRes]) => {
+      let stars = 0, pushedAt = "";
+      if (repoRes.status === "fulfilled" && repoRes.value.ok) {
+        const d = await repoRes.value.json() as { stargazers_count: number; pushed_at: string };
+        stars = d.stargazers_count;
+        pushedAt = d.pushed_at;
+      }
+      let release: ReleaseInfo | undefined;
+      if (releaseRes.status === "fulfilled" && releaseRes.value.ok) {
+        const r = await releaseRes.value.json() as { tag_name: string; assets: GHAsset[] };
+        const picked = pickBestAsset(r.assets ?? []);
+        if (picked) release = { tag: r.tag_name, assetName: picked.name, downloadUrl: picked.browser_download_url, size: picked.size };
+      }
+      if (!stars && !pushedAt && !release) return;
+      const result: GitHubData = { stars, pushedAt, release };
+      try { sessionStorage.setItem(key, JSON.stringify(result)); } catch {}
+      setData(result);
+    }).catch(() => {});
   }, [githubUrl]);
   return data;
 }
@@ -76,7 +111,7 @@ function formatRelative(iso: string): string {
 
 function GitHubStats({ githubUrl }: { githubUrl?: string }) {
   const data = useGitHubRepo(githubUrl);
-  if (!data) return null;
+  if (!data || (!data.stars && !data.pushedAt)) return null;
   return (
     <div className="flex items-center gap-3 mt-1.5">
       {data.stars > 0 && (
@@ -87,13 +122,34 @@ function GitHubStats({ githubUrl }: { githubUrl?: string }) {
           {data.stars}
         </span>
       )}
-      <span className="inline-flex items-center gap-1 font-sans text-[9px] text-[#888]">
-        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-        </svg>
-        Push {formatRelative(data.pushedAt)}
-      </span>
+      {data.pushedAt && (
+        <span className="inline-flex items-center gap-1 font-sans text-[9px] text-[#888]">
+          <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+          </svg>
+          Push {formatRelative(data.pushedAt)}
+        </span>
+      )}
     </div>
+  );
+}
+
+function DownloadButton({ githubUrl }: { githubUrl?: string }) {
+  const data = useGitHubRepo(githubUrl);
+  if (!data?.release) return null;
+  const { tag, downloadUrl, size } = data.release;
+  const sizeMB = size > 0 ? `${(size / 1048576).toFixed(1)} MB` : null;
+  return (
+    <a
+      href={downloadUrl}
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#f97316]/10 border border-[#f97316]/30 hover:bg-[#f97316]/20 hover:border-[#f97316]/60 transition-all duration-200"
+    >
+      <Download className="w-3 h-3 text-[#f97316] flex-shrink-0" />
+      <span className="font-sans text-[10px] font-bold text-[#f97316] uppercase tracking-wider">
+        Télécharger {tag}
+      </span>
+      {sizeMB && <span className="font-sans text-[9px] text-[#888]">{sizeMB}</span>}
+    </a>
   );
 }
 
@@ -305,6 +361,9 @@ export default function ProjetsPage() {
                     <ArrowRight className="w-3 h-3 flex-shrink-0" />
                   </Link>
                 )}
+                <div className="mt-3">
+                  <DownloadButton githubUrl={project.url.includes("github.com") ? project.url : undefined} />
+                </div>
               </motion.div>
             ))}
           </div>
@@ -424,17 +483,20 @@ export default function ProjetsPage() {
                     </div>
                   </div>
 
-                  {/* GitHub link */}
+                  {/* GitHub link + download */}
                   {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 pt-4 border-t border-forge-border flex items-center gap-1.5 text-[#888] hover:text-forge-orange transition-colors duration-200 font-sans text-[10px] uppercase tracking-wider w-fit"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      Voir sur GitHub
-                    </a>
+                    <div className="mt-4 pt-4 border-t border-forge-border flex flex-wrap items-center gap-3">
+                      <DownloadButton githubUrl={project.githubUrl} />
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[#888] hover:text-forge-orange transition-colors duration-200 font-sans text-[10px] uppercase tracking-wider"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        GitHub
+                      </a>
+                    </div>
                   )}
                 </motion.div>
               ))}
