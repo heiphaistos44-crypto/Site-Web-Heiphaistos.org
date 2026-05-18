@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Heiphaistos IT — Maintenance & Solutions Informatiques",
   description:
-    "Technicien expert en maintenance, réparation, récupération de données et solutions informatiques sur mesure.",
+    "Technicien en maintenance, réparation, récupération de données et solutions informatiques sur mesure.",
   keywords: [
     "maintenance informatique",
     "réparation PC",

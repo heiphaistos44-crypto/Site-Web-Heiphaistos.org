@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import GithubIcon from "@/components/icons/GithubIcon";
 import { FORGE_EASE } from "@/lib/easing";
@@ -30,7 +30,11 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group min-w-0">
-          <Flame className="w-5 h-5 text-forge-orange group-hover:scale-125 transition-transform duration-300 flex-shrink-0" />
+          <img
+            src="/logo.png"
+            alt="Heiphaistos"
+            className="h-9 w-9 rounded-full object-cover flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
+          />
           <span className="font-heading text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-forge-text truncate">
             HEIPHAISTOS IT
           </span>
@@ -38,13 +42,13 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8">
           <Link
-            href="/#services"
+            href="/services"
             className="font-sans text-xs text-forge-muted hover:text-forge-orange transition-colors duration-200 uppercase tracking-[0.2em]"
           >
             Services
           </Link>
           <Link
-            href="/#ecosystem"
+            href="/projets"
             className="font-sans text-xs text-forge-muted hover:text-forge-orange transition-colors duration-200 uppercase tracking-[0.2em]"
           >
             Projets
@@ -88,14 +92,14 @@ export default function Navbar() {
           >
             <div className="px-4 py-5 flex flex-col gap-4">
               <Link
-                href="/#services"
+                href="/services"
                 onClick={() => setMenuOpen(false)}
                 className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors py-1"
               >
                 Services
               </Link>
               <Link
-                href="/#ecosystem"
+                href="/projets"
                 onClick={() => setMenuOpen(false)}
                 className="font-sans text-sm text-forge-text uppercase tracking-[0.2em] hover:text-forge-orange transition-colors py-1"
               >

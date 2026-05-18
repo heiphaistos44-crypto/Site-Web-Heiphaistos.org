@@ -31,7 +31,7 @@ export default function ProjectDetailPage({ project }: { project: ProjectData })
             transition={{ duration: 0.5 }}
           >
             <Link
-              href="/#ecosystem"
+              href="/projets"
               className="inline-flex items-center gap-2 font-sans text-forge-muted hover:text-forge-orange transition-colors text-xs uppercase tracking-[0.2em] mb-10"
             >
               <ArrowLeft className="w-4 h-4" />

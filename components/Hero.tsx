@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, MessageCircle, Wrench } from "lucide-react";
+import Link from "next/link";
 import { FORGE_EASE } from "@/lib/easing";
 
 const EMBER_COUNT = 22;
@@ -79,7 +80,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="font-sans text-forge-orange text-xs uppercase tracking-[0.5em] mb-6 font-medium"
         >
-          Technicien Informatique Expert
+          Technicien Informatique
         </motion.p>
 
         <motion.h1
@@ -128,13 +129,13 @@ export default function Hero() {
             <MessageCircle className="w-4 h-4" />
             Rejoindre le Discord
           </a>
-          <a
-            href="#services"
+          <Link
+            href="/services"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-forge-orange/60 text-forge-orange hover:bg-forge-orange/10 hover:border-forge-orange font-sans font-semibold uppercase tracking-[0.2em] text-xs rounded transition-all duration-300"
           >
             <Wrench className="w-4 h-4" />
             Mes Services
-          </a>
+          </Link>
         </motion.div>
       </div>
 

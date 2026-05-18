@@ -38,7 +38,7 @@ export default function ServiceDetailPage({ service }: { service: ServiceData })
         <div className="max-w-4xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
             <Link
-              href="/#services"
+              href="/services"
               className="inline-flex items-center gap-2 font-sans text-forge-muted hover:text-forge-orange transition-colors text-xs uppercase tracking-[0.2em] mb-10"
             >
               <ArrowLeft className="w-4 h-4" />
