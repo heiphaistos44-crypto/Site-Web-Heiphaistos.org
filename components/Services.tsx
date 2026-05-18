@@ -68,9 +68,19 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-16 sm:py-20 md:py-28 px-4 sm:px-6"
+      className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #050505 0%, #0a0a0a 100%)" }}
     >
+      {/* Forge glow top-left */}
+      <div
+        className="absolute top-0 left-0 w-[500px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.08) 0%, transparent 65%)" }}
+      />
+      {/* Forge glow bottom-right */}
+      <div
+        className="absolute bottom-0 right-0 w-[400px] h-[300px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at bottom right, rgba(220,38,38,0.07) 0%, transparent 65%)" }}
+      />
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

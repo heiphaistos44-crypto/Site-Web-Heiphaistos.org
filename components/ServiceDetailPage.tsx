@@ -32,8 +32,12 @@ export default function ServiceDetailPage({ service }: { service: ServiceData })
       {/* Hero */}
       <div className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 overflow-hidden">
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at center top, rgba(249,115,22,0.12) 0%, transparent 70%)" }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-80 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center top, rgba(249,115,22,0.22) 0%, rgba(220,38,38,0.1) 45%, transparent 72%)" }}
+        />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[120px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center top, rgba(249,115,22,0.35) 0%, transparent 65%)", filter: "blur(20px)" }}
         />
         <div className="max-w-4xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>

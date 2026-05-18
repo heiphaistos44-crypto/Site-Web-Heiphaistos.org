@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FORGE_EASE } from "@/lib/easing";
 import type { OngoingProject } from "@/lib/projects";
 import { ONGOING_DEFAULT, mergeWithDefaults } from "@/lib/projects";
+import ProjectIcon from "@/components/ProjectIcon";
 
 const PUBLISHED = [
   {
@@ -82,13 +83,19 @@ export default function ProjetsPage() {
     <div className="min-h-screen" style={{ background: "#050505" }}>
       {/* Hero */}
       <section
-        className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6 text-center"
+        className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(180deg, #0d0d0d 0%, #050505 100%)" }}
       >
+        {/* Orange glow top */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center top, rgba(249,115,22,0.14) 0%, transparent 70%)" }}
+        />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: FORGE_EASE }}
+          className="relative z-10"
         >
           <p className="font-sans text-forge-orange text-xs uppercase tracking-[0.5em] mb-4 font-medium">
             Ce que je construis
@@ -99,10 +106,19 @@ export default function ProjetsPage() {
           >
             MES PROJETS
           </h1>
-          <p className="font-sans text-forge-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-light">
+          <p className="font-sans text-[#b0b0b0] text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-light">
             Applications desktop, outils Windows et plateformes web — développés en solo.
           </p>
         </motion.div>
+        {/* Orange bottom separator */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
+          style={{ background: "linear-gradient(90deg, transparent 0%, rgba(249,115,22,0.35) 30%, rgba(249,115,22,0.35) 70%, transparent 100%)" }}
+        />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[60px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center bottom, rgba(249,115,22,0.18) 0%, transparent 70%)" }}
+        />
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-28">
@@ -135,16 +151,15 @@ export default function ProjetsPage() {
               >
                 <div
                   className="absolute top-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, transparent, #f97316, #dc2626, transparent)",
-                  }}
+                  style={{ background: "linear-gradient(90deg, transparent, #f97316, #dc2626, transparent)" }}
                 />
 
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h2 className="font-heading text-3xl tracking-wider text-forge-text group-hover:text-forge-orange transition-colors duration-300">
+                {/* Logo + header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <ProjectIcon name={project.name} className="w-14 h-14" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h2 className="font-heading text-2xl tracking-wider text-forge-text group-hover:text-forge-orange transition-colors duration-300">
                         {project.name}
                       </h2>
                       <VisibilityBadge visibility={project.visibility} />
@@ -157,14 +172,14 @@ export default function ProjetsPage() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 text-forge-muted hover:text-forge-orange transition-colors duration-200 flex-shrink-0"
+                    className="p-2 text-[#888] hover:text-forge-orange transition-colors duration-200 flex-shrink-0"
                     aria-label={`Voir ${project.name}`}
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
 
-                <p className="font-sans text-sm text-forge-muted leading-relaxed font-light flex-1 mb-4">
+                <p className="font-sans text-sm text-[#c8c8c8] leading-relaxed font-light flex-1 mb-4">
                   {project.description}
                 </p>
 
@@ -172,7 +187,7 @@ export default function ProjetsPage() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="font-sans text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full border border-forge-border text-forge-muted"
+                      className="font-sans text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full border border-forge-border text-[#999]"
                     >
                       {t}
                     </span>
@@ -230,24 +245,27 @@ export default function ProjetsPage() {
                   transition={{ duration: 0.6, delay: (i % 2) * 0.1, ease: FORGE_EASE }}
                   className="group relative bg-forge-card border border-forge-border rounded-xl p-5 sm:p-6 hover:border-forge-orange/30 transition-colors duration-300 flex flex-col"
                 >
-                  {/* Header */}
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <h2 className="font-heading text-2xl sm:text-3xl tracking-wider text-forge-text leading-none">
-                      {project.name}
-                    </h2>
-                    <div className="flex items-center gap-2 shrink-0 pt-1">
-                      <VisibilityBadge visibility={project.visibility} />
+                  {/* Header with icon */}
+                  <div className="flex items-start gap-4 mb-3">
+                    <ProjectIcon name={project.name} className="w-14 h-14 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h2 className="font-heading text-2xl sm:text-3xl tracking-wider text-forge-text leading-none">
+                          {project.name}
+                        </h2>
+                        <VisibilityBadge visibility={project.visibility} />
+                      </div>
+                      <p className="font-sans text-forge-orange text-[10px] uppercase tracking-[0.2em] font-medium mt-1">
+                        {project.tagline}
+                      </p>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <Clock className="w-2.5 h-2.5 text-[#888]" />
+                        <span className="font-sans text-[#888] text-[10px]">Depuis {project.since}</span>
+                      </div>
                     </div>
                   </div>
-                  <p className="font-sans text-forge-orange text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
-                    {project.tagline}
-                  </p>
-                  <div className="flex items-center gap-1.5 mb-4">
-                    <Clock className="w-2.5 h-2.5 text-forge-muted" />
-                    <span className="font-sans text-forge-muted text-[10px]">Depuis {project.since}</span>
-                  </div>
 
-                  <p className="font-sans text-xs text-forge-muted leading-relaxed font-light mb-4">
+                  <p className="font-sans text-xs text-[#c0c0c0] leading-relaxed font-light mb-4">
                     {project.description}
                   </p>
 
@@ -256,7 +274,7 @@ export default function ProjetsPage() {
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="font-sans text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-forge-border text-forge-muted"
+                        className="font-sans text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-forge-border text-[#999]"
                       >
                         {t}
                       </span>
@@ -266,7 +284,7 @@ export default function ProjetsPage() {
                   {/* Progress */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="font-sans text-[10px] text-forge-muted uppercase tracking-wider">
+                      <span className="font-sans text-[10px] text-[#888] uppercase tracking-wider">
                         Avancement
                       </span>
                       <span className="font-heading text-base text-forge-orange tracking-wider">
@@ -274,7 +292,7 @@ export default function ProjetsPage() {
                       </span>
                     </div>
                     <ProgressBar value={project.progress} />
-                    <p className="font-sans text-[10px] text-forge-muted mt-1.5 uppercase tracking-wider">
+                    <p className="font-sans text-[10px] text-[#888] mt-1.5 uppercase tracking-wider">
                       {project.statusLabel}
                     </p>
                   </div>
@@ -282,13 +300,13 @@ export default function ProjetsPage() {
                   {/* Done / Next */}
                   <div className="grid grid-cols-1 gap-4 pt-4 border-t border-forge-border flex-1">
                     <div>
-                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-2 flex items-center gap-1">
+                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-[#888] mb-2 flex items-center gap-1">
                         <CheckCircle2 className="w-2.5 h-2.5 text-green-500" />
                         Terminé
                       </p>
                       <ul className="space-y-1">
                         {project.done.map((item) => (
-                          <li key={item} className="font-sans text-[10px] text-forge-muted font-light flex items-start gap-1.5">
+                          <li key={item} className="font-sans text-[10px] text-[#b8b8b8] font-light flex items-start gap-1.5">
                             <span className="w-1 h-1 rounded-full bg-green-500/60 mt-1 flex-shrink-0" />
                             {item}
                           </li>
@@ -296,13 +314,13 @@ export default function ProjetsPage() {
                       </ul>
                     </div>
                     <div>
-                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-2 flex items-center gap-1">
+                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-[#888] mb-2 flex items-center gap-1">
                         <Circle className="w-2.5 h-2.5 text-forge-orange" />
                         À venir
                       </p>
                       <ul className="space-y-1">
                         {project.next.map((item) => (
-                          <li key={item} className="font-sans text-[10px] text-forge-muted font-light flex items-start gap-1.5">
+                          <li key={item} className="font-sans text-[10px] text-[#b8b8b8] font-light flex items-start gap-1.5">
                             <span className="w-1 h-1 rounded-full bg-forge-orange/40 mt-1 flex-shrink-0" />
                             {item}
                           </li>
@@ -317,7 +335,7 @@ export default function ProjetsPage() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 pt-4 border-t border-forge-border flex items-center gap-1.5 text-forge-muted hover:text-forge-orange transition-colors duration-200 font-sans text-[10px] uppercase tracking-wider w-fit"
+                      className="mt-4 pt-4 border-t border-forge-border flex items-center gap-1.5 text-[#888] hover:text-forge-orange transition-colors duration-200 font-sans text-[10px] uppercase tracking-wider w-fit"
                     >
                       <ExternalLink className="w-3 h-3" />
                       Voir sur GitHub
@@ -337,7 +355,7 @@ export default function ProjetsPage() {
           transition={{ duration: 0.7 }}
           className="mt-16 text-center"
         >
-          <p className="font-sans text-forge-muted text-sm mb-6 font-light">
+          <p className="font-sans text-[#888] text-sm mb-6 font-light">
             Code source disponible sur GitHub.
           </p>
           <a
