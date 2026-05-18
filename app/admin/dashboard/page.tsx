@@ -13,19 +13,9 @@ import {
   Check,
 } from "lucide-react";
 
-export interface OngoingProject {
-  name: string;
-  tagline: string;
-  description: string;
-  tech: string[];
-  progress: number;
-  statusLabel: string;
-  done: string[];
-  next: string[];
-  since: string;
-  githubUrl?: string;
-  visibility?: "public" | "private";
-}
+export type { OngoingProject } from "@/lib/projects";
+import type { OngoingProject } from "@/lib/projects";
+import { ONGOING_DEFAULT } from "@/lib/projects";
 
 const STORAGE_KEY = "hph_ongoing_projects";
 
@@ -214,8 +204,15 @@ export default function AdminDashboard() {
     }
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setProjects(JSON.parse(stored));
-    } catch {}
+      if (stored) {
+        const parsed: OngoingProject[] = JSON.parse(stored);
+        setProjects(parsed.length > 0 ? parsed : ONGOING_DEFAULT);
+      } else {
+        setProjects(ONGOING_DEFAULT);
+      }
+    } catch {
+      setProjects(ONGOING_DEFAULT);
+    }
   }, [router]);
 
   function save() {

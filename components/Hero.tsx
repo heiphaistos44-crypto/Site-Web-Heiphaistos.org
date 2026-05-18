@@ -94,10 +94,24 @@ export default function Hero() {
         </motion.h1>
 
         <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.95, ease: FORGE_EASE }}
+          className="flex justify-center mb-6"
+        >
+          <img
+            src="/logo.png"
+            alt="Heiphaistos"
+            className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
+            style={{ boxShadow: "0 0 32px rgba(249,115,22,0.25), 0 0 64px rgba(239,68,68,0.1)" }}
+          />
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="w-32 h-px mx-auto mb-8"
+          transition={{ duration: 0.8, delay: 1.05 }}
+          className="w-24 h-px mx-auto mb-8"
           style={{
             background:
               "linear-gradient(90deg, transparent, #f97316, #dc2626, transparent)",

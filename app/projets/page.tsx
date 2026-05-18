@@ -5,7 +5,8 @@ import { ArrowRight, ExternalLink, Clock, CheckCircle2, Circle } from "lucide-re
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FORGE_EASE } from "@/lib/easing";
-import type { OngoingProject } from "@/app/admin/dashboard/page";
+import type { OngoingProject } from "@/lib/projects";
+import { ONGOING_DEFAULT as _ONGOING_DEFAULT } from "@/lib/projects";
 
 const PUBLISHED = [
   {
@@ -231,10 +232,10 @@ function VisibilityBadge({ visibility }: { visibility?: "public" | "private" }) 
       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-sans text-[9px] font-semibold uppercase tracking-wider border ${
         pub
           ? "bg-green-500/10 border-green-500/30 text-green-400"
-          : "bg-[#222]/50 border-[#2a2a2a] text-forge-muted"
+          : "bg-red-500/10 border-red-500/30 text-red-400"
       }`}
     >
-      <span className={`w-1 h-1 rounded-full ${pub ? "bg-green-400" : "bg-[#555]"}`} />
+      <span className={`w-1 h-1 rounded-full ${pub ? "bg-green-400" : "bg-red-400"}`} />
       {pub ? "Public" : "Privé"}
     </span>
   );
@@ -261,7 +262,10 @@ export default function ProjetsPage() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("hph_ongoing_projects");
-      if (stored) setOngoing(JSON.parse(stored));
+      if (stored) {
+        const parsed: OngoingProject[] = JSON.parse(stored);
+        if (parsed.length > 0) setOngoing(parsed);
+      }
     } catch {}
   }, []);
 
