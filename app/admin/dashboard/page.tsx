@@ -23,6 +23,8 @@ export interface OngoingProject {
   done: string[];
   next: string[];
   since: string;
+  githubUrl?: string;
+  visibility?: "public" | "private";
 }
 
 const STORAGE_KEY = "hph_ongoing_projects";

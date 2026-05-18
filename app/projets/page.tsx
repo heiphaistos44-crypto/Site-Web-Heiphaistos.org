@@ -15,8 +15,9 @@ const PUBLISHED = [
       "47+ outils intégrés — processus, drivers, registre, récupération de données, mode WinPE.",
     tech: ["Tauri v2", "Rust", "Vue.js", "Windows", "WinPE"],
     href: "/projets/nitrite",
-    url: "https://nitrite.heiphaistos.org",
+    url: "https://github.com/heiphaistos44-crypto/NITriTe-2.0",
     external: false,
+    visibility: "public" as const,
   },
   {
     name: "Plexit",
@@ -27,6 +28,7 @@ const PUBLISHED = [
     href: "/projets/plexit",
     url: "https://plexit.heiphaistos.org",
     external: false,
+    visibility: "private" as const,
   },
 ];
 
@@ -38,6 +40,8 @@ const ONGOING_DEFAULT: OngoingProject[] = [
     description:
       "Client Rust + serveur de signaling Go. Transmission vidéo bas-latence, transfert de fichiers, chat intégré, tray icon.",
     tech: ["Rust", "Tauri v2", "Go", "Vue.js", "WebRTC"],
+    githubUrl: "https://github.com/heiphaistos44-crypto/GhostHandDesk",
+    visibility: "public",
     progress: 75,
     statusLabel: "En développement actif",
     done: [
@@ -70,11 +74,10 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "Release v1.2.0 publiée",
       "Audit sécurité appliqué (mutex, SVG DoS)",
     ],
-    next: [
-      "Documentation utilisateur",
-      "Support formats supplémentaires",
-    ],
+    next: ["Documentation utilisateur", "Support formats supplémentaires"],
     since: "Fév. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/PureRemove",
+    visibility: "public",
   },
   {
     name: "UniversalConverter",
@@ -91,12 +94,10 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "Drag-drop et traitement en lot",
       "Audit & corrections v1.5.0",
     ],
-    next: [
-      "README et documentation",
-      "Release GitHub officielle",
-      "Tests de non-régression",
-    ],
+    next: ["README et documentation", "Release GitHub officielle", "Tests de non-régression"],
     since: "Fév. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/UniversalConverter",
+    visibility: "public",
   },
   {
     name: "OmniPlayer",
@@ -114,12 +115,10 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "UI egui : seekbar, playlist, navigateur",
       "Sync A/V, surround 5.1/7.1 downmix",
     ],
-    next: [
-      "Release stable + documentation",
-      "Intégration métadonnées TMDB/OpenSubtitles",
-      "Corrections de stabilité en cours",
-    ],
+    next: ["Release stable + documentation", "Intégration TMDB/OpenSubtitles", "Corrections stabilité"],
     since: "Avr. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/OmniPlayer",
+    visibility: "public",
   },
   {
     name: "TutoInfo",
@@ -136,12 +135,10 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "Audit sécurité complet appliqué",
       "Déploiement tuto.heiphaistos.org",
     ],
-    next: [
-      "Contenu tutoriels à remplir",
-      "Fonctionnalités avancées (quiz, progression)",
-      "SEO et optimisations de performance",
-    ],
+    next: ["Contenu tutoriels à remplir", "Fonctionnalités avancées (quiz, progression)", "SEO + perf"],
     since: "Avr. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/Tuto",
+    visibility: "private",
   },
   {
     name: "RSSDI",
@@ -158,13 +155,10 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "Dashboard HTML/JS sur port 3000",
       "Isolation réseau via Docker Compose",
     ],
-    next: [
-      "Documentation complète",
-      "Publication de release GitHub",
-      "Authentification API renforcée",
-      "Tests et couverture",
-    ],
+    next: ["Documentation complète", "Release GitHub officielle", "Auth API renforcée", "Tests"],
     since: "Nov. 2025",
+    githubUrl: "https://github.com/heiphaistos44-crypto/RSSDI",
+    visibility: "public",
   },
   {
     name: "Bot Discord",
@@ -181,14 +175,70 @@ const ONGOING_DEFAULT: OngoingProject[] = [
       "Tickets, giveaways, logs avancés",
       "Dashboard web sur port 5000",
     ],
-    next: [
-      "Stabilisation et tests",
-      "Documentation administrateur",
-      "Intégration RSSDI",
-    ],
+    next: ["Stabilisation et tests", "Documentation administrateur", "Intégration RSSDI"],
     since: "Nov. 2025",
+    githubUrl: "https://github.com/heiphaistos44-crypto/Bot-Discord-RSSDI",
+    visibility: "private",
+  },
+  {
+    name: "Gestionnaire OrdiPlus",
+    tagline: "Gestionnaire d'inventaire informatique",
+    description:
+      "Application web de gestion d'inventaire pour OrdiPlus. CI/CD automatisé, base D1 Cloudflare, déployé sur ordibarre.pages.dev.",
+    tech: ["Cloudflare Pages", "D1", "CI/CD"],
+    progress: 60,
+    statusLabel: "En développement actif",
+    done: [
+      "Déploiement Cloudflare Pages",
+      "Base de données D1 Cloudflare",
+      "Pipeline CI/CD automatisé (push → deploy)",
+      "Migration de données",
+    ],
+    next: ["Fonctionnalités inventaire avancées", "Interface d'administration", "Export données"],
+    since: "Fév. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/Gestionnaire-ordiplus-",
+    visibility: "private",
+  },
+  {
+    name: "OrdiPlus Fiches",
+    tagline: "Générateur de fiches produit A4",
+    description:
+      "Application desktop Tauri pour générer des fiches produit professionnelles matériel PC. Export PDF/PNG, 10 thèmes, drag-drop sections.",
+    tech: ["Tauri v2", "Vue 3", "TypeScript", "Pinia", "Rust", "Vite"],
+    progress: 78,
+    statusLabel: "Phase de maintenance",
+    done: [
+      "Moteur layout A4 portrait et paysage",
+      "6 panneaux catégories (specs, prix, accessoires…)",
+      "10 thèmes visuels (gaming, corporate, elegant…)",
+      "Export PDF/PNG via dialogue système natif",
+      "Drag-drop réordonnancement des sections",
+      "Zoom Ctrl+wheel + aperçu temps réel",
+      "Release v3.2.0 avec installeur MSI/EXE",
+    ],
+    next: ["README et documentation", "Optimisations performances", "Cas limites edge cases"],
+    since: "Fév. 2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/Generateurficheproduit",
+    visibility: "public",
   },
 ];
+
+function VisibilityBadge({ visibility }: { visibility?: "public" | "private" }) {
+  if (!visibility) return null;
+  const pub = visibility === "public";
+  return (
+    <span
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-sans text-[9px] font-semibold uppercase tracking-wider border ${
+        pub
+          ? "bg-green-500/10 border-green-500/30 text-green-400"
+          : "bg-[#222]/50 border-[#2a2a2a] text-forge-muted"
+      }`}
+    >
+      <span className={`w-1 h-1 rounded-full ${pub ? "bg-green-400" : "bg-[#555]"}`} />
+      {pub ? "Public" : "Privé"}
+    </span>
+  );
+}
 
 function ProgressBar({ value }: { value: number }) {
   return (
@@ -280,10 +330,13 @@ export default function ProjetsPage() {
 
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h2 className="font-heading text-3xl tracking-wider text-forge-text group-hover:text-forge-orange transition-colors duration-300">
-                      {project.name}
-                    </h2>
-                    <p className="font-sans text-forge-orange text-xs uppercase tracking-[0.2em] mt-1 font-medium">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h2 className="font-heading text-3xl tracking-wider text-forge-text group-hover:text-forge-orange transition-colors duration-300">
+                        {project.name}
+                      </h2>
+                      <VisibilityBadge visibility={project.visibility} />
+                    </div>
+                    <p className="font-sans text-forge-orange text-xs uppercase tracking-[0.2em] font-medium">
                       {project.tagline}
                     </p>
                   </div>
@@ -354,44 +407,43 @@ export default function ProjetsPage() {
               <div className="flex-1 h-px bg-forge-border" />
             </motion.div>
 
-            <div className="flex flex-col gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {ongoing.map((project, i) => (
                 <motion.div
                   key={project.name}
                   initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, delay: i * 0.1, ease: FORGE_EASE }}
-                  className="group relative bg-forge-card border border-forge-border rounded-xl p-6 sm:p-8 hover:border-forge-orange/30 transition-colors duration-300"
+                  transition={{ duration: 0.6, delay: (i % 2) * 0.1, ease: FORGE_EASE }}
+                  className="group relative bg-forge-card border border-forge-border rounded-xl p-5 sm:p-6 hover:border-forge-orange/30 transition-colors duration-300 flex flex-col"
                 >
                   {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
-                    <div>
-                      <h2 className="font-heading text-3xl sm:text-4xl tracking-wider text-forge-text">
-                        {project.name}
-                      </h2>
-                      <p className="font-sans text-forge-orange text-xs uppercase tracking-[0.2em] mt-1 font-medium">
-                        {project.tagline}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <Clock className="w-3 h-3 text-forge-muted" />
-                      <span className="font-sans text-forge-muted text-xs">
-                        Depuis {project.since}
-                      </span>
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h2 className="font-heading text-2xl sm:text-3xl tracking-wider text-forge-text leading-none">
+                      {project.name}
+                    </h2>
+                    <div className="flex items-center gap-2 shrink-0 pt-1">
+                      <VisibilityBadge visibility={project.visibility} />
                     </div>
                   </div>
+                  <p className="font-sans text-forge-orange text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
+                    {project.tagline}
+                  </p>
+                  <div className="flex items-center gap-1.5 mb-4">
+                    <Clock className="w-2.5 h-2.5 text-forge-muted" />
+                    <span className="font-sans text-forge-muted text-[10px]">Depuis {project.since}</span>
+                  </div>
 
-                  <p className="font-sans text-sm text-forge-muted leading-relaxed font-light mb-5">
+                  <p className="font-sans text-xs text-forge-muted leading-relaxed font-light mb-4">
                     {project.description}
                   </p>
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-6">
+                  <div className="flex flex-wrap gap-1 mb-4">
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="font-sans text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full border border-forge-border text-forge-muted"
+                        className="font-sans text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-forge-border text-forge-muted"
                       >
                         {t}
                       </span>
@@ -399,58 +451,65 @@ export default function ProjetsPage() {
                   </div>
 
                   {/* Progress */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-sans text-xs text-forge-muted uppercase tracking-wider">
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-sans text-[10px] text-forge-muted uppercase tracking-wider">
                         Avancement
                       </span>
-                      <span className="font-heading text-lg text-forge-orange tracking-wider">
+                      <span className="font-heading text-base text-forge-orange tracking-wider">
                         {project.progress}%
                       </span>
                     </div>
                     <ProgressBar value={project.progress} />
-                    <p className="font-sans text-[11px] text-forge-muted mt-2 uppercase tracking-wider">
+                    <p className="font-sans text-[10px] text-forge-muted mt-1.5 uppercase tracking-wider">
                       {project.statusLabel}
                     </p>
                   </div>
 
                   {/* Done / Next */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-forge-border">
+                  <div className="grid grid-cols-1 gap-4 pt-4 border-t border-forge-border flex-1">
                     <div>
-                      <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-3 flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3 h-3 text-green-500" />
+                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-2 flex items-center gap-1">
+                        <CheckCircle2 className="w-2.5 h-2.5 text-green-500" />
                         Terminé
                       </p>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1">
                         {project.done.map((item) => (
-                          <li
-                            key={item}
-                            className="font-sans text-xs text-forge-muted font-light flex items-start gap-2"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-green-500/60 mt-1.5 flex-shrink-0" />
+                          <li key={item} className="font-sans text-[10px] text-forge-muted font-light flex items-start gap-1.5">
+                            <span className="w-1 h-1 rounded-full bg-green-500/60 mt-1 flex-shrink-0" />
                             {item}
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-3 flex items-center gap-1.5">
-                        <Circle className="w-3 h-3 text-forge-orange" />
+                      <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.3em] text-forge-muted mb-2 flex items-center gap-1">
+                        <Circle className="w-2.5 h-2.5 text-forge-orange" />
                         À venir
                       </p>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1">
                         {project.next.map((item) => (
-                          <li
-                            key={item}
-                            className="font-sans text-xs text-forge-muted font-light flex items-start gap-2"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-forge-orange/40 mt-1.5 flex-shrink-0" />
+                          <li key={item} className="font-sans text-[10px] text-forge-muted font-light flex items-start gap-1.5">
+                            <span className="w-1 h-1 rounded-full bg-forge-orange/40 mt-1 flex-shrink-0" />
                             {item}
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
+
+                  {/* GitHub link */}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 pt-4 border-t border-forge-border flex items-center gap-1.5 text-forge-muted hover:text-forge-orange transition-colors duration-200 font-sans text-[10px] uppercase tracking-wider w-fit"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      Voir sur GitHub
+                    </a>
+                  )}
                 </motion.div>
               ))}
             </div>
