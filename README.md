@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Heiphaistos.org — Site Vitrine
 
-## Getting Started
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Stack](https://img.shields.io/badge/stack-Next.js%2016%20%2B%20Tailwind%20v4%20%2B%20Framer%20Motion-orange)
+![Deploy](https://img.shields.io/badge/deploy-Cloudflare%20Pages-F38020?logo=cloudflare)
 
-First, run the development server:
+Site vitrine de **heiphaistos44-crypto** — portfolio de projets open-source spécialisés dans la maintenance Windows, les outils de développement et les applications de bureau.
+
+**URL :** https://heiphaistos.org
+
+---
+
+## Fonctionnalités
+
+- **Cartes projets animées** — icônes SVG uniques par projet avec animations Framer Motion
+- **GitHub live stats** — étoiles et date du dernier push en temps réel via l'API GitHub
+- **ContributorBadge** — badges contributeurs avec avatars GitHub
+- **ProjectIcon** — composant d'icônes avec fallback intelligent (logo réel → initiales)
+- **Logos forge** — animations spécifiques pour les projets phares (NiTriTe, GhostHandDesk, etc.)
+- **Design responsive** — optimisé mobile, tablette, desktop
+- **Performance** — Next.js App Router, rendu statique (SSG), images optimisées
+
+---
+
+## Stack
+
+| Composant | Technologie |
+|-----------|-------------|
+| Framework | Next.js 16 (App Router) |
+| Style | Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icônes | Lucide React |
+| Déploiement | Cloudflare Pages |
+
+---
+
+## Développement
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Déploiement
 
-To learn more about Next.js, take a look at the following resources:
+Push sur `main` → déploiement automatique via Cloudflare Pages CI.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projet CF Pages : `site-web-heiphaistos-org`
