@@ -32,6 +32,50 @@ const PUBLISHED = [
     external: false,
     visibility: "private" as const,
   },
+  {
+    name: "SecuScan AI",
+    tagline: "Scanner sécurité offensif/défensif pour Windows",
+    description:
+      "Analyse SAST, secrets, binaires PE, règles YARA et correction automatique via IA. Batch Fix intégré (Claude/Gemini), export HTML/TXT, suggestions anti-faux-positifs.",
+    tech: ["Tauri v2", "Rust", "YARA", "PE Analysis", "LLM API"],
+    href: "https://github.com/heiphaistos44-crypto/SecuScan",
+    url: "https://github.com/heiphaistos44-crypto/SecuScan",
+    external: true,
+    visibility: "public" as const,
+  },
+  {
+    name: "AllRename",
+    tagline: "Renommeur multimédia intelligent pour Plex",
+    description:
+      "Renomme films, séries et sous-titres automatiquement via TMDB. Intégration qBittorrent et Transmission. Rollback LIFO, clés chiffrées DPAPI.",
+    tech: ["C# 12", ".NET 8", "WPF", "TMDB API", "DPAPI"],
+    href: "https://github.com/heiphaistos44-crypto/AllRename",
+    url: "https://github.com/heiphaistos44-crypto/AllRename",
+    external: true,
+    visibility: "public" as const,
+  },
+  {
+    name: "PureUpdate",
+    tagline: "Gestionnaire de mises à jour Windows tout-en-un",
+    description:
+      "Centralise Windows Update, Winget, Chocolatey et Scoop. Health Score, tray icon, point de restauration automatique, onglet erreurs, planificateur.",
+    tech: ["C# 12", ".NET 8", "WPF-UI Fluent", "WUAPI", "Winget"],
+    href: "https://github.com/heiphaistos44-crypto/PureUpdate-",
+    url: "https://github.com/heiphaistos44-crypto/PureUpdate-",
+    external: true,
+    visibility: "public" as const,
+  },
+  {
+    name: "FileScanner",
+    tagline: "Analyseur de sécurité fichiers avec ClamAV natif",
+    description:
+      "Pipeline complet hash→MIME→PE→YARA→ClamAV→VirusTotal. Quarantaine XOR, auto-update signatures ClamAV, virtual scroll IoC, export multi-format.",
+    tech: ["Tauri v2", "Rust", "Vue 3", "ClamAV", "YARA", "VirusTotal"],
+    href: "https://github.com/heiphaistos44-crypto/FileScanner",
+    url: "https://github.com/heiphaistos44-crypto/FileScanner",
+    external: true,
+    visibility: "public" as const,
+  },
 ];
 
 interface ReleaseInfo {
