@@ -1,14 +1,16 @@
 "use client";
 
-/* ── Vraies images ── */
+import type { ReactNode } from "react";
 const REAL_LOGOS: Record<string, { src: string; pos?: string }> = {
   Nitrite:  { src: "/icons/nitrite.png",  pos: "center center" },
   Plexit:   { src: "/icons/plexit.png",   pos: "center center" },
   TutoInfo: { src: "/icons/tutoinfo.png", pos: "center 28%" },
 };
 
+/* ── Vraies images ── */
+
 /* ── SVG — chaque icon = univers visuel propre ── */
-type IR = (uid: string) => React.ReactNode;
+type IR = (uid: string) => ReactNode;
 
 const ICONS: Record<string, IR> = {
 
@@ -327,6 +329,155 @@ const ICONS: Record<string, IR> = {
       {/* Étoile décorative en haut à droite */}
       <path d="M34 3 L35.2 6.5 L38.5 6.5 L36 8.5 L37 12 L34 10 L31 12 L32 8.5 L29.5 6.5 L32.8 6.5 Z"
         fill={`url(#gd${u})`} filter={`url(#gw${u})`}/>
+    </svg>
+  ),
+
+  /* ─ SecuScan AI ─ bouclier radar sur fond violet profond */
+  "SecuScan AI": (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="#2d0050"/>
+          <stop offset="100%" stopColor="#070010"/>
+        </radialGradient>
+        <linearGradient id={`rd${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f43f5e"/>
+          <stop offset="100%" stopColor="#c026d3"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Bouclier */}
+      <path d="M20 3 L34 8 L34 20 C34 29 27 35 20 38 C13 35 6 29 6 20 L6 8 Z"
+        fill="#160020" stroke={`url(#rd${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      {/* Arcs radar */}
+      <path d="M13 21 C13 17 16 14 20 14 C24 14 27 17 27 21"
+        stroke="#c026d3" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.55"/>
+      <path d="M10 22 C10 15 14 10 20 10 C26 10 30 15 30 22"
+        stroke="#f43f5e" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.3"/>
+      {/* Lignes visée */}
+      <line x1="20" y1="11" x2="20" y2="31" stroke={`url(#rd${u})`} strokeWidth="0.7" opacity="0.35"/>
+      <line x1="9" y1="21" x2="31" y2="21" stroke={`url(#rd${u})`} strokeWidth="0.7" opacity="0.35"/>
+      {/* Point central */}
+      <circle cx="20" cy="21" r="2.8" fill={`url(#rd${u})`} filter={`url(#gw${u})`}/>
+      <circle cx="20" cy="21" r="1.2" fill="#fff" opacity="0.8"/>
+      {/* Badge alerte bas-droite */}
+      <path d="M30 29 L34 37 L26 37 Z" fill="#f43f5e" filter={`url(#gw${u})`}/>
+      <rect x="29.2" y="31.5" width="1.6" height="2.8" rx="0.8" fill="white" opacity="0.9"/>
+      <rect x="29.2" y="35.2" width="1.6" height="1.6" rx="0.8" fill="white" opacity="0.9"/>
+    </svg>
+  ),
+
+  /* ─ AllRename ─ dossier + flèches rename sur fond indigo nuit */
+  AllRename: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#0f1f4a"/>
+          <stop offset="100%" stopColor="#030712"/>
+        </radialGradient>
+        <linearGradient id={`bl${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#818cf8"/>
+          <stop offset="100%" stopColor="#60a5fa"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.8" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Dossier */}
+      <path d="M2 11 L2 31 L24 31 L24 11 Z" fill="#0c1a3e" stroke={`url(#bl${u})`} strokeWidth="1.6"/>
+      <path d="M2 11 L8 11 L10 9 L16 9 L16 11 L24 11" fill="#0c1a3e" stroke={`url(#bl${u})`} strokeWidth="1.6"/>
+      {/* Lignes fichier A */}
+      <rect x="4" y="15" width="8" height="1.4" rx="0.7" fill={`url(#bl${u})`} opacity="0.7"/>
+      <rect x="4" y="18" width="6" height="1.4" rx="0.7" fill={`url(#bl${u})`} opacity="0.45"/>
+      <rect x="4" y="21" width="7" height="1.4" rx="0.7" fill={`url(#bl${u})`} opacity="0.3"/>
+      {/* Flèche → droite */}
+      <path d="M26 19 L35 19" stroke={`url(#bl${u})`} strokeWidth="2.2" strokeLinecap="round"
+        filter={`url(#gw${u})`}/>
+      <path d="M32 16 L36 19 L32 22" stroke={`url(#bl${u})`} strokeWidth="2.2"
+        strokeLinecap="round" strokeLinejoin="round" fill="none" filter={`url(#gw${u})`}/>
+      {/* Lignes fichier B renommé */}
+      <rect x="14" y="23" width="8" height="1.4" rx="0.7" fill="#60a5fa" opacity="0.85"/>
+      <rect x="14" y="26" width="5" height="1.4" rx="0.7" fill="#818cf8" opacity="0.5"/>
+    </svg>
+  ),
+
+  /* ─ PureUpdate ─ bouclier checkmark + barre progression cyan */
+  PureUpdate: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="#001e28"/>
+          <stop offset="100%" stopColor="#000b0e"/>
+        </radialGradient>
+        <linearGradient id={`cy${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#22d3ee"/>
+          <stop offset="100%" stopColor="#06b6d4"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Bouclier principal */}
+      <path d="M20 3 L34 8.5 L34 20 C34 28 27 33.5 20 37 C13 33.5 6 28 6 20 L6 8.5 Z"
+        fill="#001a22" stroke={`url(#cy${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      {/* Checkmark */}
+      <path d="M12 20 L17 26 L28 13"
+        stroke={`url(#cy${u})`} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
+        fill="none" filter={`url(#gw${u})`}/>
+      {/* Barre de progression basse */}
+      <rect x="5" y="35" width="30" height="3.5" rx="1.75" fill="#001a22" stroke="#0e7490" strokeWidth="1"/>
+      <rect x="5" y="35" width="22" height="3.5" rx="1.75" fill={`url(#cy${u})`}
+        filter={`url(#gw${u})`}/>
+    </svg>
+  ),
+
+  /* ─ FileScanner ─ loupe + fichier + lignes de scan émeraude */
+  FileScanner: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#021a0c"/>
+          <stop offset="100%" stopColor="#010804"/>
+        </radialGradient>
+        <linearGradient id={`gr${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#34d399"/>
+          <stop offset="100%" stopColor="#10b981"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.8" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Document */}
+      <path d="M4 4 L22 4 L22 10 L28 10 L28 32 L4 32 Z"
+        fill="#021208" stroke="#10b981" strokeWidth="1.5"/>
+      {/* Coin plié */}
+      <path d="M22 4 L22 10 L28 10 Z" fill="#033018" stroke="#10b981" strokeWidth="1"/>
+      {/* Lignes de contenu */}
+      <rect x="7" y="14" width="12" height="1.3" rx="0.65" fill={`url(#gr${u})`} opacity="0.7"/>
+      <rect x="7" y="17.5" width="15" height="1.3" rx="0.65" fill={`url(#gr${u})`} opacity="0.45"/>
+      <rect x="7" y="21" width="10" height="1.3" rx="0.65" fill={`url(#gr${u})`} opacity="0.3"/>
+      {/* Ligne de scan animée */}
+      <rect x="4" y="24.5" width="24" height="1.5" rx="0.75"
+        fill={`url(#gr${u})`} opacity="0.5" filter={`url(#gw${u})`}/>
+      {/* Loupe */}
+      <circle cx="31" cy="31" r="7" fill="#021208" stroke={`url(#gr${u})`} strokeWidth="2.2"
+        filter={`url(#gw${u})`}/>
+      <circle cx="31" cy="31" r="4" fill="#021208" stroke="#34d399" strokeWidth="1" opacity="0.4"/>
+      <line x1="36.5" y1="36.5" x2="40" y2="40" stroke={`url(#gr${u})`} strokeWidth="2.8"
+        strokeLinecap="round" filter={`url(#gw${u})`}/>
+      {/* Croix dans la loupe */}
+      <line x1="29" y1="31" x2="33" y2="31" stroke="#34d399" strokeWidth="1.2" opacity="0.8"/>
+      <line x1="31" y1="29" x2="31" y2="33" stroke="#34d399" strokeWidth="1.2" opacity="0.8"/>
     </svg>
   ),
 };
