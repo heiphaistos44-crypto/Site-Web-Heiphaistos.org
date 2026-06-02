@@ -189,6 +189,47 @@ export const ONGOING_DEFAULT: OngoingProject[] = [
     ],
   },
   {
+    name: "PureRSS",
+    tagline: "Générateur de flux RSS depuis des liens web",
+    description:
+      "Application web qui convertit des liens en flux RSS standardisés pour l'agrégation de contenu. Architecture TypeScript + Vue.js, containerisée Docker avec pipeline CI/CD automatisé.",
+    tech: ["TypeScript", "Vue.js", "Docker", "Nginx", "GitHub Actions"],
+    progress: 65,
+    statusLabel: "En développement actif",
+    done: [
+      "Pipeline d'ingestion et parsing de liens web",
+      "Génération de flux RSS standardisés",
+      "Containerisation Docker + Nginx",
+      "CI/CD automatisé via GitHub Actions",
+    ],
+    next: ["Release GitHub officielle", "Documentation utilisateur", "Interface de gestion avancée"],
+    since: "2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/PureRSS",
+    visibility: "public",
+  },
+  {
+    name: "Jarvis",
+    tagline: "Assistant IA local type J.A.R.V.I.S.",
+    description:
+      "Assistant IA de bureau avec voix bidirectionnelle, 28 outils intégrés, monitoring système temps réel et mémoire persistante inter-sessions. LLM Mistral-7B 100% local, zéro cloud.",
+    tech: ["Python 3.12", "FastAPI", "Tauri v2", "React 18", "Mistral-7B", "Faster-Whisper", "SQLite"],
+    progress: 90,
+    statusLabel: "v3.0.2 — Améliorations STT (30 mai 2026)",
+    done: [
+      "Backend FastAPI + Mistral-7B local (accélération NVIDIA GPU)",
+      "Interface desktop Tauri v2 + React 18",
+      "STT Faster-Whisper + TTS Piper (voix bidirectionnelle)",
+      "28 outils intégrés (tâches, monitoring, fichiers…)",
+      "Mémoire persistante SQLite inter-sessions",
+      "Monitoring système temps réel",
+      "Release v3.0.2 publiée",
+    ],
+    next: ["Optimisations GPU avancées", "Documentation complète", "Nouvelles commandes système"],
+    since: "2026",
+    githubUrl: "https://github.com/heiphaistos44-crypto/Jarvis",
+    visibility: "public",
+  },
+  {
     name: "OrdiPlus Fiches",
     tagline: "Générateur de fiches produit A4",
     description:

@@ -15,8 +15,13 @@ jobs:
           echo "${{ secrets.VPS_SSH_KEY }}" | base64 --decode --ignore-garbage > /tmp/deploy_key
           chmod 600 /tmp/deploy_key
 
-      - name: Deploy via SSH
+      - name: Write htpasswd then deploy
         run: |
+          echo "${{ secrets.HTPASSWD_CONTENT }}" | ssh -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            "cat > /opt/forgeinformatique/.htpasswd && chmod 600 /opt/forgeinformatique/.htpasswd"
+
           ssh -i /tmp/deploy_key \
             -o StrictHostKeyChecking=no \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
