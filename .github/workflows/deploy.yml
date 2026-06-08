@@ -1,4 +1,4 @@
-﻿name: Deploy to VPS
+name: Deploy to VPS
 
 on:
   push:
@@ -16,11 +16,13 @@ jobs:
           chmod 600 /tmp/deploy_key
 
       - name: Write htpasswd then deploy
+        env:
+          HTPASSWD_CONTENT: ${{ secrets.HTPASSWD_CONTENT }}
         run: |
-          echo "${{ secrets.HTPASSWD_CONTENT }}" | ssh -i /tmp/deploy_key \
+          printf '%s\n' "$HTPASSWD_CONTENT" | ssh -i /tmp/deploy_key \
             -o StrictHostKeyChecking=no \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
-            "cat > /opt/forgeinformatique/.htpasswd && chmod 600 /opt/forgeinformatique/.htpasswd"
+            "cat > /opt/forgeinformatique/.htpasswd && chmod 644 /opt/forgeinformatique/.htpasswd"
 
           ssh -i /tmp/deploy_key \
             -o StrictHostKeyChecking=no \
