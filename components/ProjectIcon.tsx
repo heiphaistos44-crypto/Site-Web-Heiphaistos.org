@@ -332,6 +332,147 @@ const ICONS: Record<string, IR> = {
     </svg>
   ),
 
+  /* ─ PlexMetaForge ─ disque Plex doré + engrenage plugin */
+  PlexMetaForge: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="40%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="#1a1000"/>
+          <stop offset="100%" stopColor="#050300"/>
+        </radialGradient>
+        <linearGradient id={`am${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#fbbf24"/>
+          <stop offset="100%" stopColor="#d97706"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Disque média Plex */}
+      <circle cx="16" cy="16" r="13" fill="#120c00" stroke={`url(#am${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      <circle cx="16" cy="16" r="7" fill="#0d0800" stroke="#d97706" strokeWidth="0.8" opacity="0.45"/>
+      <circle cx="16" cy="16" r="3" fill={`url(#am${u})`} filter={`url(#gw${u})`}/>
+      {/* Ticks disque */}
+      <line x1="16" y1="3.5" x2="16" y2="6.5" stroke="#f59e0b" strokeWidth="1.2" opacity="0.5"/>
+      <line x1="16" y1="25.5" x2="16" y2="28.5" stroke="#f59e0b" strokeWidth="1.2" opacity="0.5"/>
+      <line x1="3.5" y1="16" x2="6.5" y2="16" stroke="#f59e0b" strokeWidth="1.2" opacity="0.5"/>
+      <line x1="25.5" y1="16" x2="28.5" y2="16" stroke="#f59e0b" strokeWidth="1.2" opacity="0.5"/>
+      {/* Engrenage plugin — bas droite */}
+      <circle cx="30" cy="30" r="8.5" fill="#150c00" stroke={`url(#am${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      <rect x="28.5" y="21.2" width="3" height="3" rx="0.6" fill={`url(#am${u})`}/>
+      <rect x="28.5" y="35.8" width="3" height="3" rx="0.6" fill={`url(#am${u})`}/>
+      <rect x="21.2" y="28.5" width="3" height="3" rx="0.6" fill={`url(#am${u})`}/>
+      <rect x="35.8" y="28.5" width="3" height="3" rx="0.6" fill={`url(#am${u})`}/>
+      <circle cx="30" cy="30" r="3" fill={`url(#am${u})`} filter={`url(#gw${u})`}/>
+      <circle cx="30" cy="30" r="1.3" fill="#150c00"/>
+    </svg>
+  ),
+
+  /* ─ PureRSS ─ arcs RSS + atome scan sur fond vert-forêt */
+  PureRSS: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="20%" cy="75%" r="75%">
+          <stop offset="0%" stopColor="#0d2200"/>
+          <stop offset="100%" stopColor="#040800"/>
+        </radialGradient>
+        <linearGradient id={`gr${u}`} x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#16a34a"/>
+          <stop offset="100%" stopColor="#86efac"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.8" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Dot RSS */}
+      <circle cx="5" cy="35" r="4" fill={`url(#gr${u})`} filter={`url(#gw${u})`}/>
+      {/* Arcs RSS */}
+      <path d="M5 27 C12 27 18 33 18 35" stroke={`url(#gr${u})`} strokeWidth="2.5" strokeLinecap="round" fill="none" filter={`url(#gw${u})`}/>
+      <path d="M5 19 C18 19 26 27 26 35" stroke={`url(#gr${u})`} strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.75"/>
+      <path d="M5 11 C23 11 33 21 33 35" stroke={`url(#gr${u})`} strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.45"/>
+      <path d="M5 3 C27 3 38 14 38 35" stroke={`url(#gr${u})`} strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.2"/>
+      {/* Badge check haut-droite */}
+      <circle cx="32" cy="9" r="7" fill="#0d2200" stroke={`url(#gr${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      <path d="M27.5 9 L31 13 L37 5" stroke={`url(#gr${u})`} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" filter={`url(#gw${u})`}/>
+    </svg>
+  ),
+
+  /* ─ PureRSS-Web ─ nuage Cloudflare + arcs RSS orange-bleu */
+  "PureRSS-Web": (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="#0c0f1a"/>
+          <stop offset="100%" stopColor="#030508"/>
+        </radialGradient>
+        <linearGradient id={`cf${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f97316"/>
+          <stop offset="100%" stopColor="#fb923c"/>
+        </linearGradient>
+        <linearGradient id={`bl${u}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#38bdf8"/>
+          <stop offset="100%" stopColor="#0ea5e9"/>
+        </linearGradient>
+        <filter id={`gw${u}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Nuage Cloudflare-style */}
+      <path d="M8 28 C4 28 2 25 2 22 C2 19 4.5 17 7.5 17 C7.5 13 10 10 14 10 C16 10 17.5 11 18.5 12.5 C20 11 22 10 24 10 C29 10 33 14 33 19 C35.5 19.5 38 21.5 38 24 C38 26.5 36 28 33 28 Z"
+        fill="#0d1422" stroke={`url(#cf${u})`} strokeWidth="1.8" filter={`url(#gw${u})`}/>
+      {/* Arcs RSS sous le nuage */}
+      <circle cx="9" cy="36" r="2.5" fill={`url(#bl${u})`} filter={`url(#gw${u})`}/>
+      <path d="M9 30.5 C13.5 30.5 17 34 17 36" stroke={`url(#bl${u})`} strokeWidth="2" strokeLinecap="round" fill="none" filter={`url(#gw${u})`}/>
+      <path d="M9 25 C17 25 23 31 23 36" stroke={`url(#bl${u})`} strokeWidth="1.8" strokeLinecap="round" fill="none" opacity="0.65"/>
+    </svg>
+  ),
+
+  /* ─ JARVIS ─ répulseur holographique bleu électrique */
+  JARVIS: (u) => (
+    <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+      <defs>
+        <radialGradient id={`bg${u}`} cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stopColor="#001428"/>
+          <stop offset="100%" stopColor="#000508"/>
+        </radialGradient>
+        <radialGradient id={`core${u}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ffffff"/>
+          <stop offset="30%" stopColor="#7dd3fc"/>
+          <stop offset="100%" stopColor="#0284c7"/>
+        </radialGradient>
+        <filter id={`gw${u}`} x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+        <filter id={`sm${u}`} x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1" result="b"/>
+          <feComposite in="SourceGraphic" in2="b" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="40" height="40" fill={`url(#bg${u})`}/>
+      {/* Hexagone Iron Man chest */}
+      <path d="M20 3 L34 11 L34 29 L20 37 L6 29 L6 11 Z"
+        fill="#001828" stroke="#38bdf8" strokeWidth="1.5" filter={`url(#sm${u})`}/>
+      <path d="M20 8 L30 14 L30 26 L20 32 L10 26 L10 14 Z"
+        fill="#000f1a" stroke="#7dd3fc" strokeWidth="0.8" opacity="0.5"/>
+      {/* Triangles énergétiques */}
+      <path d="M20 11 L28 16 L20 21 Z" fill="#38bdf8" opacity="0.15"/>
+      <path d="M20 29 L12 24 L20 19 Z" fill="#38bdf8" opacity="0.15"/>
+      {/* Répulseur central */}
+      <circle cx="20" cy="20" r="7" fill="#001020" stroke="#38bdf8" strokeWidth="1.5" filter={`url(#sm${u})`}/>
+      <circle cx="20" cy="20" r="4.5" fill={`url(#core${u})`} filter={`url(#gw${u})`}/>
+      {/* Halo externe */}
+      <circle cx="20" cy="20" r="10" stroke="#38bdf8" strokeWidth="0.5" opacity="0.2"/>
+      <circle cx="20" cy="20" r="14" stroke="#0284c7" strokeWidth="0.4" opacity="0.12"/>
+    </svg>
+  ),
+
   /* ─ SecuScan AI ─ bouclier radar sur fond violet profond */
   "SecuScan AI": (u) => (
     <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
